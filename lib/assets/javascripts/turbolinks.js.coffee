@@ -495,7 +495,7 @@ class ProgressBar
 # Delay execution of function long enough to miss the popstate event
 # some browsers fire on the initial page load.
 bypassOnLoadPopstate = (fn) ->
-  setTimeout fn, 500
+  setTimeout fn, 0
 
 installDocumentReadyPageEventTriggers = ->
   document.addEventListener 'DOMContentLoaded', ( ->
