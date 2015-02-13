@@ -492,11 +492,6 @@ class ProgressBar
     """
 
 
-# Delay execution of function long enough to miss the popstate event
-# some browsers fire on the initial page load.
-bypassOnLoadPopstate = (fn) ->
-  setTimeout fn, 500
-
 installDocumentReadyPageEventTriggers = ->
   document.addEventListener 'DOMContentLoaded', ( ->
     triggerEvent EVENTS.CHANGE
@@ -527,8 +522,7 @@ initializeTurbolinks = ->
     rememberCurrentUrl()
     rememberCurrentState()
   , false
-  bypassOnLoadPopstate ->
-    window.addEventListener 'popstate', installHistoryChangeHandler, false
+  window.addEventListener 'popstate', installHistoryChangeHandler, false
 
 # Handle bug in Firefox 26/27 where history.state is initially undefined
 historyStateIsDefined =
