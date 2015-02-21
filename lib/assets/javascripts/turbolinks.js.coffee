@@ -158,7 +158,7 @@ setAutofocusElement = ->
 
 reflectNewUrl = (url) ->
   if (url = new ComponentUrl url).absolute isnt referer
-    window.history.pushState { turbolinks: true, url: url.absolute }, '', url.absolute
+    window.history.pushState { url: url.absolute }, '', url.absolute
 
 reflectRedirectedUrl = ->
   if location = xhr.getResponseHeader 'X-XHR-Redirected-To'
@@ -173,7 +173,7 @@ rememberReferer = ->
   referer = document.location.href
 
 rememberCurrentUrl = ->
-  window.history.replaceState { turbolinks: true, url: document.location.href }, '', document.location.href
+  window.history.replaceState { url: document.location.href }, '', document.location.href
 
 rememberCurrentState = ->
   currentState = window.history.state
@@ -510,7 +510,7 @@ installJqueryAjaxSuccessPageUpdateTrigger = ->
       triggerEvent EVENTS.UPDATE
 
 installHistoryChangeHandler = (event) ->
-  if event.state?.turbolinks
+  if event.state?
     if cachedPage = pageCache[(new ComponentUrl(event.state.url)).absolute]
       cacheCurrentPage()
       fetchHistory cachedPage
